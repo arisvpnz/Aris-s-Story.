@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Big Problem With Bullying – Aris's Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --red: #cc0000;
+    --red-bright: #ff0000;
+    --red-dark: #880000;
+    --grey: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ===================== SECTION BASE ===================== */
+  .section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 20px;
+  }
+
+  /* ===================== SECTION 1: INTRO ===================== */
+  #intro {
+    background: #000;
+    position: relative;
+  }
+
+  .holo-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(180,0,0,0.08) 0%, transparent 70%);
+    animation: holoPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes holoPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .scan-lines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.015) 2px,
+      rgba(255,255,255,0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .intro-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .main-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 10vw, 120px);
+    color: var(--white);
+    letter-spacing: 4px;
+    line-height: 1;
+    animation: titleReveal 1.5s ease forwards, glitch 5s infinite 2s;
+    opacity: 0;
+    position: relative;
+  }
+
+  @keyframes titleReveal {
+    0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  @keyframes glitch {
+    0%, 92%, 100% { transform: translate(0); filter: none; }
+    93% { transform: translate(-3px, 1px); filter: drop-shadow(3px 0 var(--red)); }
+    94% { transform: translate(3px, -1px); filter: drop-shadow(-3px 0 var(--white)); }
+    95% { transform: translate(-2px, 2px); filter: drop-shadow(2px 0 var(--red)); }
+    96% { transform: translate(0); }
+    97% { transform: translate(4px, -2px); filter: drop-shadow(-4px 0 var(--red-bright)); }
+    98% { transform: translate(-4px, 1px); }
+    99% { transform: translate(2px, -1px); filter: drop-shadow(2px 0 var(--white)); }
+  }
+
+  .main-title::before, .main-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+  }
+
+  .main-title::before {
+    color: var(--red);
+    animation: glitchBefore 5s infinite 2s;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+
+  .main-title::after {
+    color: var(--white);
+    animation: glitchAfter 5s infinite 2.1s;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  }
+
+  @keyframes glitchBefore {
+    0%, 92%, 100% { transform: none; opacity: 0; }
+    93% { transform: translate(-4px, 0); opacity: 0.7; }
+    95% { transform: translate(4px, 0); opacity: 0; }
+  }
+
+  @keyframes glitchAfter {
+    0%, 93%, 100% { transform: none; opacity: 0; }
+    94% { transform: translate(4px, 0); opacity: 0.7; }
+    96% { transform: translate(-4px, 0); opacity: 0; }
+  }
+
+  .subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(12px, 2vw, 16px);
+    color: rgba(255,255,255,0.35);
+    margin-top: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: fadeInUp 1s ease 1.8s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    letter-spacing: 3px;
+    animation: fadeInUp 1s ease 3s forwards, bounce 2s infinite 4s;
+    opacity: 0;
+    text-transform: uppercase;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+
+  /* ===================== SECTION 2: CRISIS ===================== */
+  #crisis {
+    background: #050505;
+    border-top: 1px solid rgba(200,0,0,0.3);
+  }
+
+  .crisis-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 4vw, 38px);
+    color: var(--white);
+    text-align: center;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(20px);
+  }
+
+  .crisis-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--red);
+    font-size: clamp(14px, 2.5vw, 22px);
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    transform: translateY(20px);
+  }
+
+  .please-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 5vw, 60px);
+    color: var(--red-bright);
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px rgba(255,0,0,0.6);
+    animation: pleasePulse 2s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+    transform: translateY(20px);
+  }
+
+  @keyframes pleasePulse {
+    0%, 100% { text-shadow: 0 0 20px rgba(255,0,0,0.6); }
+    50% { text-shadow: 0 0 40px rgba(255,0,0,1), 0 0 80px rgba(255,0,0,0.4); }
+  }
+
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+    transform: translateY(20px);
+  }
+
+  .number-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(200,0,0,0.25);
+    border-left: 3px solid var(--red);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .number-item:hover {
+    background: rgba(200,0,0,0.08);
+    border-color: var(--red-bright);
+  }
+
+  .number-country {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+  }
+
+  .number-tel {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--red-bright);
+    letter-spacing: 2px;
+  }
+
+  .thankyou-text {
+    margin-top: 50px;
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(13px, 2vw, 18px);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    font-style: italic;
+    border-top: 1px solid rgba(200,0,0,0.2);
+    padding-top: 30px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.8s, transform 0.8s ease 0.8s;
+    transform: translateY(20px);
+    width: 100%;
+    max-width: 900px;
+  }
+
+  /* ===================== SECTION 3: BULLY CHAT ===================== */
+  #bully {
+    background: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bully-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(50,0,0,0.4) 0%, black 80%);
+    transition: background 3s ease;
+  }
+
+  .chat-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .chat-bubble {
+    padding: 14px 22px;
+    border-radius: 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(13px, 2vw, 17px);
+    max-width: 75%;
+    position: relative;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .bubble-left {
+    background: rgba(30,30,30,0.9);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .bubble-right {
+    background: rgba(80,0,0,0.7);
+    border: 1px solid rgba(255,0,0,0.2);
+    color: #ffaaaa;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .bubble-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .stop-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 20vw, 200px);
+    color: var(--red-bright);
+    text-align: center;
+    letter-spacing: 10px;
+    z-index: 5;
+    position: relative;
+    opacity: 0;
+    display: none;
+    text-shadow: 0 0 60px rgba(255,0,0,0.8);
+  }
+
+  /* ===================== SECTION 4: RAIN / STATS ===================== */
+  #rainstats {
+    background: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  canvas#rainCanvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.5;
+  }
+
+  .stats-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+  }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(60px, 15vw, 140px);
+    color: var(--red-bright);
+    letter-spacing: 6px;
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(255,0,0,0.6);
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .stat-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(13px, 2vw, 18px);
+    color: rgba(255,255,255,0.8);
+    line-height: 1.8;
+    margin: 20px 0;
+    opacity: 0;
+    transition: opacity 1s ease 0.4s;
+  }
+
+  .emphasis-words {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 4vw, 42px);
+    color: var(--red-bright);
+    letter-spacing: 8px;
+    margin-top: 20px;
+    line-height: 1.6;
+    opacity: 0;
+    transition: opacity 1s ease 0.8s;
+  }
+
+  /* ===================== SECTION 5: CRACK / MY STORY ===================== */
+  #crack-section {
+    background: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .crack-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .mystory-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(70px, 18vw, 180px);
+    color: var(--white);
+    letter-spacing: 8px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    text-shadow: 2px 2px 0 var(--red), -2px -2px 0 rgba(255,255,255,0.1);
+    text-align: center;
+  }
+
+  /* ===================== SECTION 6: STORY ===================== */
+  #story {
+    background: #020202;
+    position: relative;
+  }
+
+  .story-container {
+    max-width: 780px;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .story-block {
+    margin-bottom: 50px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .story-block.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .story-block p {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(13px, 1.8vw, 16px);
+    line-height: 2;
+    color: rgba(255,255,255,0.82);
+    text-align: left;
+  }
+
+  .story-block p strong {
+    color: var(--red-bright);
+    font-weight: bold;
+  }
+
+  .story-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--red);
+    margin: 0 0 20px 0;
+  }
+
+  .chapter-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(10px, 1.5vw, 13px);
+    color: var(--red);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* ===================== WARNING SECTION ===================== */
+  #warning-section {
+    background: #000;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 60px 20px;
+    border-top: 2px solid var(--red);
+    border-bottom: 2px solid var(--red);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .warning-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 5vw, 55px);
+    color: var(--red-bright);
+    letter-spacing: 6px;
+    text-align: center;
+    animation: warningFlash 1.2s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(255,0,0,0.7);
+  }
+
+  @keyframes warningFlash {
+    0%, 100% { opacity: 1; text-shadow: 0 0 30px rgba(255,0,0,0.7); }
+    50% { opacity: 0.6; text-shadow: 0 0 60px rgba(255,0,0,1), 0 0 100px rgba(255,0,0,0.5); }
+  }
+
+  /* ===================== DRIP TEXT ===================== */
+  .drip-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 5vw, 55px);
+    color: var(--red-bright);
+    letter-spacing: 3px;
+    line-height: 1.5;
+    text-align: center;
+    position: relative;
+    text-shadow:
+      0 4px 8px rgba(200,0,0,0.8),
+      0 8px 16px rgba(180,0,0,0.5),
+      0 16px 32px rgba(150,0,0,0.3);
+    animation: dripDrip 3s ease-in-out infinite;
+  }
+
+  @keyframes dripDrip {
+    0%, 100% {
+      text-shadow:
+        0 4px 8px rgba(200,0,0,0.8),
+        0 8px 16px rgba(180,0,0,0.5);
+      transform: translateY(0);
+    }
+    50% {
+      text-shadow:
+        0 6px 12px rgba(255,0,0,1),
+        0 12px 24px rgba(200,0,0,0.7),
+        0 24px 48px rgba(150,0,0,0.4);
+      transform: translateY(2px);
+    }
+  }
+
+  /* ===================== SECTION 7: FINAL STORY ===================== */
+  #final-story {
+    background: #020202;
+    position: relative;
+  }
+
+  .final-story-container {
+    max-width: 780px;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .quote-block {
+    border-left: 3px solid var(--red);
+    padding: 16px 24px;
+    margin: 25px 0;
+    background: rgba(150,0,0,0.06);
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(13px, 1.8vw, 16px);
+    color: rgba(255,255,255,0.9);
+    line-height: 2;
+    font-style: italic;
+  }
+
+  /* ===================== ENDING ===================== */
+  #ending {
+    background: #000;
+    text-align: center;
+    border-top: 3px solid var(--red);
+    padding: 100px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ending-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(120,0,0,0.15), transparent 70%);
+    animation: holoPulse 4s ease-in-out infinite;
+  }
+
+  .based-on {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 4vw, 48px);
+    color: var(--white);
+    letter-spacing: 6px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 1s ease;
+    text-align: center;
+  }
+
+  .stay-safe {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 10vw, 100px);
+    color: var(--red-bright);
+    letter-spacing: 8px;
+    position: relative;
+    z-index: 2;
+    margin: 20px 0;
+    text-shadow: 0 0 40px rgba(255,0,0,0.5);
+    opacity: 0;
+    transition: opacity 1s ease 0.3s;
+    animation: pleasePulse 3s ease-in-out infinite;
+  }
+
+  .credits {
+    position: relative;
+    z-index: 2;
+    margin-top: 60px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    line-height: 2.5;
+    opacity: 0;
+    transition: opacity 1s ease 0.6s;
+  }
+
+  .credits span {
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ===================== VISIBLE STATE ===================== */
+  .reveal-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* ===================== FLASH OVERLAY ===================== */
+  #flash-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--red-bright);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    display: none;
+  }
+
+  /* ===================== PROGRESS LINE ===================== */
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--red);
+    z-index: 1000;
+    width: 0%;
+    box-shadow: 0 0 10px rgba(255,0,0,0.6);
+    transition: width 0.1s;
+  }
+
+  /* ===================== NOISE ===================== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.018;
+    pointer-events: none;
+    z-index: 9998;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="flash-overlay"></div>
+
+<!-- ============================================================
+     SECTION 1: INTRO
+     ============================================================ -->
+<section class="section" id="intro">
+  <div class="holo-bg"></div>
+  <div class="scan-lines"></div>
+  <div class="intro-content">
+    <h1 class="main-title" data-text="THE BIG PROBLEM WITH BULLYING">THE BIG PROBLEM WITH BULLYING</h1>
+    <p class="subtitle">Took 3 Weeks &nbsp;·&nbsp; Made by Arisvpnz</p>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; scroll to begin &nbsp; ↓</div>
+</section>
+
+<!-- ============================================================
+     SECTION 2: CRISIS NUMBERS
+     ============================================================ -->
+<section class="section" id="crisis">
+  <div style="max-width:900px;width:100%;padding:20px;">
+    <h2 class="crisis-title">Before we start —</h2>
+    <p class="crisis-subtitle">If you are struggling with emotional problems or suicidal thoughts.</p>
+    <div class="please-text">PLEASE. PLEASE. PLEASE.<br>DIAL ONE OF THESE NUMBERS:</div>
+
+    <div class="numbers-grid">
+      <div class="number-item"><span class="number-country">🇺🇸 United States</span><span class="number-tel">988</span></div>
+      <div class="number-item"><span class="number-country">🇳🇱 Netherlands</span><span class="number-tel">113</span></div>
+      <div class="number-item"><span class="number-country">🇬🇧 United Kingdom</span><span class="number-tel">116 123</span></div>
+      <div class="number-item"><span class="number-country">🇦🇺 Australia</span><span class="number-tel">13 11 14</span></div>
+      <div class="number-item"><span class="number-country">🇨🇦 Canada</span><span class="number-tel">1-833-456-4566</span></div>
+      <div class="number-item"><span class="number-country">🇩🇪 Germany</span><span class="number-tel">0800 111 0 111</span></div>
+      <div class="number-item"><span class="number-country">🇫🇷 France</span><span class="number-tel">3114</span></div>
+      <div class="number-item"><span class="number-country">🇪🇸 Spain</span><span class="number-tel">024</span></div>
+      <div class="number-item"><span class="number-country">🇮🇹 Italy</span><span class="number-tel">800 274 274</span></div>
+      <div class="number-item"><span class="number-country">🇯🇵 Japan</span><span class="number-tel">0120-783-556</span></div>
+      <div class="number-item"><span class="number-country">🇰🇷 South Korea</span><span class="number-tel">1393</span></div>
+      <div class="number-item"><span class="number-country">🇧🇷 Brazil</span><span class="number-tel">188</span></div>
+      <div class="number-item"><span class="number-country">🇲🇽 Mexico</span><span class="number-tel">800 290 0024</span></div>
+      <div class="number-item"><span class="number-country">🇮🇳 India</span><span class="number-tel">9152987821</span></div>
+      <div class="number-item"><span class="number-country">🇿🇦 South Africa</span><span class="number-tel">0800 567 567</span></div>
+      <div class="number-item"><span class="number-country">🇳🇿 New Zealand</span><span class="number-tel">0800 543 354</span></div>
+      <div class="number-item"><span class="number-country">🇮🇪 Ireland</span><span class="number-tel">116 123</span></div>
+      <div class="number-item"><span class="number-country">🇧🇪 Belgium</span><span class="number-tel">0800 32 123</span></div>
+      <div class="number-item"><span class="number-country">🇸🇪 Sweden</span><span class="number-tel">90101</span></div>
+      <div class="number-item"><span class="number-country">🇵🇹 Portugal</span><span class="number-tel">213 544 545</span></div>
+    </div>
+
+    <p class="thankyou-text">Thank you for listening to my story.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3: BULLY CHAT
+     ============================================================ -->
+<section class="section" id="bully">
+  <div class="bully-bg" id="bullyBg"></div>
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-bubble bubble-left" id="b1">"yo you're actually so ugly lmao"</div>
+    <div class="chat-bubble bubble-right" id="b2">"HAHA UR SO UGLY!!! 💀💀💀"</div>
+    <div class="chat-bubble bubble-left" id="b3">"bro why are u even here lol"</div>
+    <div class="chat-bubble bubble-right" id="b4">"HAHAHA KYS BROOO 😂😂"</div>
+    <div class="chat-bubble bubble-left" id="b5">"ur so weird omg"</div>
+    <div class="chat-bubble bubble-right" id="b6">"UR SO GAY 💀💀"</div>
+    <div class="chat-bubble bubble-left" id="b7">"nobody likes you here"</div>
+    <div class="chat-bubble bubble-right" id="b8">"just leave already lmaooo"</div>
+  </div>
+  <div class="stop-text" id="stopText">STOP.</div>
+</section>
+
+<!-- ============================================================
+     SECTION 4: RAIN + STATS
+     ============================================================ -->
+<section class="section" id="rainstats">
+  <canvas id="rainCanvas"></canvas>
+  <div class="stats-content">
+    <div class="stat-number" id="statNum">500+</div>
+    <div class="stat-desc" id="statDesc">
+      Per month, more than <strong style="color:var(--red-bright)">500+ kids and adults</strong> take their own life
+      due to bullying, stress, and people who think words don't matter.
+      <br><br>
+      This might sound like a joke to you, if you say those things.
+    </div>
+    <div class="emphasis-words" id="emphWords">
+      BUT. SOME. PEOPLE.<br>TAKE. THIS. SERIOUS.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5: SCREEN CRACK → MY STORY
+     ============================================================ -->
+<section class="section" id="crack-section">
+  <canvas class="crack-overlay" id="crackCanvas"></canvas>
+  <div class="mystory-title" id="myStoryTitle">MY STORY</div>
+</section>
+
+<!-- ============================================================
+     SECTION 6: THE STORY
+     ============================================================ -->
+<section class="section" id="story" style="justify-content:flex-start; padding-top:80px; padding-bottom:80px;">
+  <div class="story-container">
+
+    <div class="story-block" id="sb1">
+      <div class="chapter-label">Introduction</div>
+      <div class="story-divider"></div>
+      <p>
+        Hello. My name is <strong>Aris</strong>.<br><br>
+        Also known as <strong>Silver. Dav. Gay boy.</strong> And more and more names that were never mine to carry.<br><br>
+        I was born on <strong>8th December, 2011</strong>. That makes me 14 years old.<br><br>
+        Sadly, I have had a <strong>lung infection since birth</strong>. On top of that, I was <strong>diagnosed with ADHD</strong>. In short — ADHD means I cannot stay still, I get distracted easily, and my mind never stops. I will explain my whole story. So please — stay.
+      </p>
+    </div>
+
+    <div class="story-block" id="sb2">
+      <div class="chapter-label">Primary School — Age 6</div>
+      <div class="story-divider"></div>
+      <p>
+        At the age of 6, it was my first day going to primary school in the Netherlands. I was pretty lonely at first — but I quickly found a best friend. We'll call him <strong>Job2</strong>.<br><br>
+        Me and Job2 grew up together. We were close. Real close.<br><br>
+        But in <strong>6th–8th class</strong> — the last years before high school — my life became <strong>HELL</strong>.<br><br>
+        I was being bullied. Constantly. For my <strong>ADHD</strong>. For my <strong>tics</strong> — tics are when you repeatedly do something over and over, uncontrollably, usually triggered by stress.<br><br>
+        My teachers were racist towards me. All except <strong>one</strong>.<br><br>
+        That one teacher had the same problems as me. ADHD. He was a gay man — which I fully supported, even as a Muslim. He told me to ignore the bad teachers. He would protect me. He promised.<br><br>
+        When the time came for grades — a corrupt teacher tried to give me <strong>VMBO</strong> (the lowest level) to push me down, even though my score was high enough for <strong>HAVO</strong>.<br><br>
+        That man stepped in immediately. Him and my parents had a fierce, harsh discussion with the school. They threatened to involve the police over the racism. The corrupt teacher got scared and corrected the grade.<br><br>
+        I went to the school I had scored for.<br><br>
+        I thanked that man with everything I had. <strong>His name will always live in my mind.</strong>
+      </p>
+    </div>
+
+    <div class="story-block" id="sb3">
+      <div class="chapter-label">High School — A New Beginning</div>
+      <div class="story-divider"></div>
+      <p>
+        Me and Job2 didn't end up in the same class, but we were in the same school. I was alone for a while.<br><br>
+        Then I met someone. We'll call him <strong>Job1</strong> — my ex best friend. He asked if I wanted to be friends. I said yes. Of course I did.<br><br>
+        Things were good. I made it to second class. Things seemed okay.<br><br>
+        <strong>Until my mother stepped in.</strong><br><br>
+        My mother has always pushed me with harsh motivation. Bad grades. Trouble. She called me <strong>gay</strong> — for my voice, for how I dressed, for how skinny I am, for how I don't eat enough. She blamed my lack of focus on games — even though I studied <strong>6 hours a day</strong> and barely ever failed.<br><br>
+        It was <strong>never enough</strong>. It never will be.
+      </p>
+    </div>
+
+    <div class="story-block" id="sb4">
+      <div class="chapter-label">The Betrayal</div>
+      <div class="story-divider"></div>
+      <p>
+        I found out that Job1's parents were <strong>racist</strong> towards me — because I am Muslim and Turkish. They called me names. Ugly names.<br><br>
+        Then, through my coding skills, I found a message in a <strong>data breach</strong>. Someone had partnered with Job1 to leak my <strong>address, school, name,</strong> and my old crush to strangers. Someone close to the situation told me the truth. I am grateful for that.<br><br>
+        I confronted Job1. He didn't care. He made things worse. Ignored me. His friends accused <em>me</em> of bullying him — when it was always the other way around.<br><br>
+        His parents told him to <strong>cut all contact with me forever.</strong> And he listened. Just like that.
+      </p>
+    </div>
+
+    <div class="story-block" id="sb5">
+      <div class="chapter-label">Everything at Once</div>
+      <div class="story-divider"></div>
+      <p>
+        Things kept crumbling.<br><br>
+        I lost my <strong>girlfriend of 9 months</strong> — she said I was too boring. My mom kept stressing me. I had <strong>no friends</strong>. Not online. Not in real life. Just nothing.<br><br>
+        The pressure from all sides — school, home, loneliness — broke something in me.<br><br>
+        On <strong>3rd September</strong>, I tried to end it all. I got scared and stopped. But it didn't get better.<br><br>
+        A few days later, things got even worse. The internet turned on me too.<br><br>
+        <strong>On 18th December,</strong> I cut myself. Deeply. And I tried to hang myself.<br><br>
+        But before it was the end — I stopped. I picked up the phone and dialed <strong>113</strong> — the Dutch suicide prevention line.<br><br>
+        I explained everything. They gave me what I needed. So I listened.<br><br>
+        I tried to become myself again. I stood up to my mother. Being firm. And slowly — slowly — it started to work.
+      </p>
+    </div>
+
+    <div class="story-block" id="sb6">
+      <div class="chapter-label">Online — New People</div>
+      <div class="story-divider"></div>
+      <p>
+        Then the internet started to change. Internet bullying pushed things down again. But I had made some friends online.<br><br>
+        <strong>Adel. Angelo. Freya.</strong><br><br>
+        All three of them were genuinely kind. My heart made its choices quickly — Angelo and Freya became very good friends. And Adel... I found myself falling for her.<br><br>
+        I talked to Adel a lot. Complimented her. Was happy. Really happy.<br><br>
+        But she told me she already cared about someone. Someone we'll call <strong>Rob8</strong>. And Rob8 had told her that he only wanted lust — not love.<br><br>
+        I told her it wasn't worth it. She got a little upset with me. I apologised. I stayed sweet. I felt bad for getting too deep into her personal things.<br><br>
+        And that's when it all started to pile up again. That's when I reached the edge.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     WARNING SECTION
+     ============================================================ -->
+<section id="warning-section">
+  <div class="warning-label">⚠ FROM NOW ON — WARNING ⚠<br>PLEASE. 13+ ONLY.</div>
+  <p style="margin-top:25px;font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(255,255,255,0.4);letter-spacing:3px;text-align:center;">This section contains descriptions of self-harm and suicidal events.</p>
+</section>
+
+<!-- ============================================================
+     SECTION 7: FINAL STORY (DRIP)
+     ============================================================ -->
+<section class="section" id="final-story" style="justify-content:flex-start; padding-top:80px; padding-bottom:80px;">
+  <div class="final-story-container">
+
+    <div class="story-block" id="fs1">
+      <div class="story-divider" style="background:var(--red-bright);"></div>
+      <div class="drip-text" style="font-size:clamp(20px,4vw,36px);margin-bottom:30px;text-align:left;">26 March, 2026.</div>
+      <p style="font-family:'Space Mono',monospace;font-size:clamp(13px,1.8vw,16px);line-height:2;color:rgba(255,255,255,0.85);">
+        I was about to end it.<br><br>
+        I had started a <strong style="color:var(--red-bright)">recording</strong>. In my left hand — a rusty knife.<br><br>
+        In the video, I explained everything. Who caused this. What happened. And I thanked everyone — for the pain they gave me that brought me to this moment.<br><br>
+        Then I updated my status. My server of <strong style="color:var(--red-bright)">200 members</strong> saw it. And the most important people —<br><br>
+        <strong style="color:var(--white)">Adel. Angelo. Freya.</strong><br><br>
+        They all started mass DMing me. At the same time. All of them. Pleading.
+      </p>
+    </div>
+
+    <div class="story-block" id="fs2">
+      <div class="quote-block">
+        &ldquo;Don't do it. Please. We're here.&rdquo;
+      </div>
+      <p style="font-family:'Space Mono',monospace;font-size:clamp(13px,1.8vw,16px);line-height:2;color:rgba(255,255,255,0.85);">
+        I was crying.<br><br>
+        <em style="color:rgba(255,255,255,0.6);">Did people really care about me? Or was this all a joke?</em><br><br>
+        I explained everything to them — as short as I could put it:
+      </p>
+    </div>
+
+    <div class="story-block" id="fs3">
+      <div class="quote-block" style="border-color:rgba(255,0,0,0.5);background:rgba(200,0,0,0.08);">
+        This may sound childish. But —<br><br>
+        I don't have IRL friends.<br>
+        My mother doesn't love me.<br>
+        My mother calls me gay.<br>
+        I get bullied at school.<br>
+        I get bullied for the hair on my body — I shaved it because of the pressure.<br>
+        My girlfriend left me.<br>
+        I get bullied for my looks, my ADHD, my tics, my clothing style.<br>
+        My best friend betrayed me.<br>
+        I get bullied for calling a suicide prevention number.<br>
+        My family bullies me too.<br><br>
+        <strong style="color:var(--red-bright)">It's all hard.</strong>
+      </div>
+    </div>
+
+    <div class="story-block" id="fs4">
+      <p style="font-family:'Space Mono',monospace;font-size:clamp(13px,1.8vw,16px);line-height:2;color:rgba(255,255,255,0.85);">
+        They comforted me. It helped — a little.<br><br>
+        But I still couldn't stop.<br><br>
+        Until <strong style="color:var(--white)">Adel</strong> told me — she cares about me. That the other person doesn't matter. That she <em>really</em> cares.<br><br>
+        I got emotional. I asked her through tears:<br><br>
+      </p>
+      <div class="quote-block">
+        &ldquo;...Are you really telling the truth?&rdquo;
+      </div>
+      <p style="font-family:'Space Mono',monospace;font-size:clamp(13px,1.8vw,16px);line-height:2;color:rgba(255,255,255,0.85);margin-top:20px;">
+        She said things to me. Things I needed to hear.<br><br>
+        I gave her a choice — to let me do it, or to stop me.<br><br>
+        She told me, with everything she had: <strong style="color:var(--red-bright)">Don't do it. Please.</strong><br><br>
+        I listened.<br><br>
+        <strong style="color:var(--white);font-size:clamp(16px,2.5vw,22px);">I dropped the knife.</strong>
+      </p>
+    </div>
+
+    <div class="story-block" id="fs5">
+      <div class="story-divider" style="background:var(--white);width:100%;max-width:200px;"></div>
+      <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,4vw,42px);color:rgba(255,255,255,0.9);letter-spacing:4px;line-height:1.5;">
+        27 MARCH.<br>
+        <span style="color:var(--red-bright);">Things are going a little better.</span><br>
+        <span style="color:rgba(255,255,255,0.5);font-size:clamp(16px,2.5vw,28px);">For now.</span>
+      </p>
+      <br>
+      <p style="font-family:'Space Mono',monospace;font-size:clamp(13px,1.8vw,16px);line-height:2;color:rgba(255,255,255,0.6);margin-top:20px;">
+        If you ever feel this way —<br>
+        please reach out to me on Discord: <strong style="color:var(--red-bright);">arisvpnz</strong><br><br>
+        I have felt the same. I have been in your shoes.<br>
+        You are not alone.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     ENDING
+     ============================================================ -->
+<section id="ending" class="section">
+  <div class="ending-glow"></div>
+  <div style="position:relative;z-index:2;text-align:center;">
+    <p class="based-on" id="basedOn">BASED ON A REAL LIFE STORY.</p>
+    <p class="stay-safe" id="staySafe">STAY SAFE.</p>
+    <div class="credits" id="creditsBlock">
+      <div style="margin-bottom:10px;color:rgba(255,255,255,0.15);letter-spacing:8px;">— CREDITS —</div>
+      <span>Arisvpnz</span><br>
+      <div style="margin-top:20px;color:rgba(255,255,255,0.1);font-size:10px;letter-spacing:3px;">
+        This story is dedicated to anyone who has ever felt alone.<br>
+        You matter. You are seen. You are real.
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById('progress-bar').style.width = progress + '%';
+});
+
+/* ============================================================
+   FLASH OVERLAY
+   ============================================================ */
+function flashScreen(color='#ff0000', duration=200) {
+  const f = document.getElementById('flash-overlay');
+  f.style.background = color;
+  f.style.display = 'block';
+  f.style.opacity = '0.85';
+  setTimeout(() => {
+    f.style.transition = 'opacity ' + duration + 'ms ease';
+    f.style.opacity = '0';
+    setTimeout(() => { f.style.display = 'none'; f.style.transition = ''; }, duration);
+  }, 80);
+}
+
+/* ============================================================
+   INTERSECTION OBSERVER HELPERS
+   ============================================================ */
+function onVisible(el, callback, threshold=0.2) {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { callback(); obs.unobserve(el); }});
+  }, { threshold });
+  obs.observe(el);
+}
+
+function revealClass(ids, delayStep=120) {
+  ids.forEach((id, i) => {
+    const el = document.getElementById(id) || document.querySelector(id);
+    if (!el) return;
+    onVisible(el, () => {
+      setTimeout(() => el.classList.add('reveal-visible'), i * delayStep);
+    }, 0.1);
+  });
+}
+
+/* ============================================================
+   CRISIS SECTION REVEAL
+   ============================================================ */
+const crisisSection = document.getElementById('crisis');
+onVisible(crisisSection, () => {
+  ['.crisis-title', '.crisis-subtitle', '.please-text', '.numbers-grid', '.thankyou-text'].forEach((sel, i) => {
+    setTimeout(() => {
+      const el = crisisSection.querySelector(sel);
+      if (el) el.classList.add('reveal-visible');
+    }, i * 200);
+  });
+}, 0.1);
+
+/* ============================================================
+   CHAT BUBBLES
+   ============================================================ */
+const bullySection = document.getElementById('bully');
+let bullyActivated = false;
+
+onVisible(bullySection, () => {
+  if (bullyActivated) return;
+  bullyActivated = true;
+
+  const bubbles = ['b1','b2','b3','b4','b5','b6','b7','b8'];
+  let i = 0;
+  const bg = document.getElementById('bullyBg');
+
+  function showNextBubble() {
+    if (i >= bubbles.length) {
+      // intensify bg
+      bg.style.transition = 'background 1s ease';
+      bg.style.background = 'radial-gradient(ellipse at center, rgba(120,0,0,0.7) 0%, black 80%)';
+
+      // flash + STOP
+      setTimeout(() => {
+        flashScreen('#ff0000', 300);
+        flashScreen('#ff0000', 300);
+        setTimeout(() => flashScreen('#ff0000', 300), 150);
+
+        const chat = document.getElementById('chatContainer');
+        const stop = document.getElementById('stopText');
+        chat.style.transition = 'opacity 0.5s';
+        chat.style.opacity = '0';
+        setTimeout(() => {
+          chat.style.display = 'none';
+          stop.style.display = 'block';
+          stop.style.animation = 'titleReveal 0.4s ease forwards, glitch 2s infinite 0.5s';
+        }, 400);
+      }, 600);
+      return;
+    }
+
+    const el = document.getElementById(bubbles[i]);
+    el.classList.add('bubble-visible');
+
+    // slightly redden background as bubbles appear
+    const redness = Math.floor((i / bubbles.length) * 80);
+    bg.style.transition = 'background 0.8s ease';
+    bg.style.background = `radial-gradient(ellipse at center, rgba(${redness},0,0,0.5) 0%, black 80%)`;
+
+    i++;
+    setTimeout(showNextBubble, 900 + Math.random() * 500);
+  }
+
+  setTimeout(showNextBubble, 400);
+}, 0.3);
+
+/* ============================================================
+   RAIN CANVAS
+   ============================================================ */
+const rainCanvas = document.getElementById('rainCanvas');
+const rctx = rainCanvas.getContext('2d');
+let drops = [];
+
+function initRain() {
+  rainCanvas.width = window.innerWidth;
+  rainCanvas.height = window.innerHeight;
+  drops = [];
+  for (let i = 0; i < 140; i++) {
+    drops.push({
+      x: Math.random() * rainCanvas.width,
+      y: Math.random() * rainCanvas.height,
+      speed: 4 + Math.random() * 8,
+      length: 15 + Math.random() * 30,
+      opacity: 0.1 + Math.random() * 0.4
+    });
+  }
+}
+
+function drawRain() {
+  rctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+  drops.forEach(d => {
+    rctx.beginPath();
+    rctx.strokeStyle = `rgba(200, 0, 0, ${d.opacity})`;
+    rctx.lineWidth = 0.8;
+    rctx.moveTo(d.x, d.y);
+    rctx.lineTo(d.x - 1, d.y + d.length);
+    rctx.stroke();
+    d.y += d.speed;
+    if (d.y > rainCanvas.height) { d.y = -d.length; d.x = Math.random() * rainCanvas.width; }
+  });
+  requestAnimationFrame(drawRain);
+}
+
+window.addEventListener('resize', initRain);
+initRain();
+drawRain();
+
+const rainSection = document.getElementById('rainstats');
+onVisible(rainSection, () => {
+  document.getElementById('statNum').classList.add('reveal-visible');
+  setTimeout(() => document.getElementById('statDesc').classList.add('reveal-visible'), 500);
+  setTimeout(() => document.getElementById('emphWords').classList.add('reveal-visible'), 1000);
+}, 0.2);
+
+/* ============================================================
+   CRACK CANVAS
+   ============================================================ */
+const crackCanvas = document.getElementById('crackCanvas');
+const cctx = crackCanvas.getContext('2d');
+let crackDrawn = false;
+
+function resizeCrackCanvas() {
+  crackCanvas.width = window.innerWidth;
+  crackCanvas.height = window.innerHeight;
+  if (crackDrawn) drawCracks();
+}
+
+function drawCracks() {
+  cctx.clearRect(0, 0, crackCanvas.width, crackCanvas.height);
+  const cx = crackCanvas.width / 2;
+  const cy = crackCanvas.height / 2;
+  const cracks = [
+    [[cx, cy],[cx-180, cy-200],[cx-320, cy-380]],
+    [[cx, cy],[cx+200, cy-160],[cx+380, cy-300]],
+    [[cx, cy],[cx-80, cy+220],[cx-140, cy+420]],
+    [[cx, cy],[cx+160, cy+180],[cx+300, cy+360]],
+    [[cx, cy],[cx-250, cy+60],[cx-450, cy+80]],
+    [[cx, cy],[cx+280, cy-30],[cx+500, cy-20]],
+    [[cx, cy],[cx-30, cy-250],[cx-60, cy-500]],
+    [[cx, cy],[cx+40, cy+280],[cx+70, cy+520]],
+    [[cx, cy],[cx-140, cy-120],[cx-180, cy-90],[cx-310, cy-110]],
+    [[cx, cy],[cx+120, cy+100],[cx+160, cy+70],[cx+280, cy+100]],
+  ];
+
+  cctx.strokeStyle = 'rgba(200,0,0,0.6)';
+  cctx.lineWidth = 1;
+  cctx.shadowColor = 'rgba(255,0,0,0.5)';
+  cctx.shadowBlur = 6;
+
+  cracks.forEach(crack => {
+    cctx.beginPath();
+    cctx.moveTo(crack[0][0], crack[0][1]);
+    for (let i = 1; i < crack.length; i++) cctx.lineTo(crack[i][0], crack[i][1]);
+    cctx.stroke();
+  });
+
+  // secondary fine cracks
+  cctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  cctx.lineWidth = 0.5;
+  cctx.shadowBlur = 2;
+  for (let i = 0; i < 20; i++) {
+    const angle = (Math.random() * Math.PI * 2);
+    const len = 50 + Math.random() * 150;
+    cctx.beginPath();
+    cctx.moveTo(cx, cy);
+    cctx.lineTo(cx + Math.cos(angle) * len, cy + Math.sin(angle) * len);
+    cctx.stroke();
+  }
+}
+
+window.addEventListener('resize', resizeCrackCanvas);
+resizeCrackCanvas();
+
+const crackSection = document.getElementById('crack-section');
+onVisible(crackSection, () => {
+  flashScreen('#ffffff', 150);
+  setTimeout(() => flashScreen('#ff0000', 150), 200);
+  setTimeout(() => {
+    crackDrawn = true;
+    drawCracks();
+    flashScreen('#ffffff', 80);
+    setTimeout(() => {
+      const title = document.getElementById('myStoryTitle');
+      title.style.opacity = '1';
+      title.style.animation = 'glitch 4s infinite 0.5s';
+    }, 400);
+  }, 400);
+}, 0.3);
+
+/* ============================================================
+   STORY BLOCKS REVEAL
+   ============================================================ */
+['sb1','sb2','sb3','sb4','sb5','sb6'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  onVisible(el, () => el.classList.add('visible'), 0.15);
+});
+
+['fs1','fs2','fs3','fs4','fs5'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  onVisible(el, () => el.classList.add('visible'), 0.15);
+});
+
+/* ============================================================
+   ENDING REVEAL
+   ============================================================ */
+onVisible(document.getElementById('ending'), () => {
+  flashScreen('#ff0000', 400);
+  setTimeout(() => {
+    document.getElementById('basedOn').classList.add('reveal-visible');
+    setTimeout(() => document.getElementById('staySafe').classList.add('reveal-visible'), 400);
+    setTimeout(() => document.getElementById('creditsBlock').classList.add('reveal-visible'), 800);
+  }, 300);
+}, 0.2);
+</script>
+</body>
+</html>
